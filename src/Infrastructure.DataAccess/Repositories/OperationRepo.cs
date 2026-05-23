@@ -1,7 +1,7 @@
-using Itmo.Dev.Platform.Postgres.Connection;
-using Itmo.Dev.Platform.Postgres.Extensions;
 using Application.Abstractions.Repositories;
 using Application.Models;
+using Itmo.Dev.Platform.Postgres.Connection;
+using Itmo.Dev.Platform.Postgres.Extensions;
 using Npgsql;
 using System.Runtime.CompilerServices;
 
@@ -18,8 +18,7 @@ public class OperationRepo : IOperationRepository
 
     public IEnumerable<Operation> GetAllOperations(long accountId)
     {
-        const string sql =
-            """
+        const string sql = """
             SELECT StartMoney, MoneyDiff, OperationID, Date
             FROM operations
             WHERE AccountId = :accountId

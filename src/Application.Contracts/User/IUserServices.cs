@@ -2,13 +2,13 @@ namespace Application.Contracts.User;
 
 public interface IUserServices
 {
-    UserOperationResult GetBalance();
+    public UserOperationResult GetBalance();
 
-    UserOperationResult MoneyChange(double amount);
+    public UserOperationResult MoneyChange(double amount);
 
-    UserOperationResult UserOperationHistory();
+    public UserOperationResult UserOperationHistory();
 
-    UserCreationResult CreateUser(string name, string pinCode);
+    public UserCreationResult CreateUser(string name, string pinCode);
 
-    void Logout();
+    public void Logout();
 }

@@ -2,5 +2,5 @@ namespace Presentation.Scenarios;
 
 public interface IScenarioProvider
 {
-    IEnumerable<IScenario> GetScenarios();
+    public IEnumerable<IScenario> GetScenarios();
 }

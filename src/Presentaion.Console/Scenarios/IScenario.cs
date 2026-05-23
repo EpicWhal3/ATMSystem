@@ -2,7 +2,7 @@ namespace Presentation.Scenarios;
 
 public interface IScenario
 {
-    string Name { get; }
+    public string Name { get; }
 
-    void Run();
+    public void Run();
 }

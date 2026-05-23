@@ -1,7 +1,7 @@
 using Application.AdminServices;
-using Application.UserServices;
 using Application.Contracts.Admin;
 using Application.Contracts.User;
+using Application.UserServices;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Application.Extensions;

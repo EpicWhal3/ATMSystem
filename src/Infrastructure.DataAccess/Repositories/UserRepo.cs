@@ -1,8 +1,8 @@
-using Itmo.Dev.Platform.Postgres.Connection;
-using Itmo.Dev.Platform.Postgres.Extensions;
 using Application.Abstractions.Models;
 using Application.Abstractions.Repositories;
 using Application.Models;
+using Itmo.Dev.Platform.Postgres.Connection;
+using Itmo.Dev.Platform.Postgres.Extensions;
 using Npgsql;
 using System.Runtime.CompilerServices;
 
@@ -19,8 +19,7 @@ public class UserRepo : IUserRepository
 
     public void AddUser(string name, string pinCode)
     {
-        const string sql =
-            """INSERT INTO users (Username, pincode) VALUES (:name, :pinCode)""";
+        const string sql = """INSERT INTO users (Username, pincode) VALUES (:name, :pinCode)""";
 
         ConfiguredTaskAwaitable<NpgsqlConnection> connectionAwaiter = _connectionProvider
             .GetConnectionAsync(CancellationToken.None)
@@ -29,15 +28,13 @@ public class UserRepo : IUserRepository
         NpgsqlConnection connection = connectionAwaiter.GetAwaiter().GetResult();
 
         using var command = new NpgsqlCommand(sql, connection);
-        command.AddParameter("name", name)
-            .AddParameter("pinCode", pinCode);
+        command.AddParameter("name", name).AddParameter("pinCode", pinCode);
         command.ExecuteNonQuery();
     }
 
     public User? GetUser(string name, string pinCode)
     {
-        const string sql =
-            """
+        const string sql = """
             SELECT AccountId, Username, PinCode, MoneyAmount
             FROM users
             WHERE Username = :username AND PinCode = :pinCode;
@@ -66,8 +63,7 @@ public class UserRepo : IUserRepository
 
     public DataBaseOperationResults MoneyExchange(User user, double amount)
     {
-        const string sql =
-            """
+        const string sql = """
             SELECT MoneyAmount
             FROM users
             WHERE accountid = :accountId AND pincode = :pinCode;
@@ -82,8 +78,7 @@ public class UserRepo : IUserRepository
         double money;
         using (var command = new NpgsqlCommand(sql, connection))
         {
-            command.AddParameter("accountId", user.Id)
-                .AddParameter("pinCode", user.Pincode);
+            command.AddParameter("accountId", user.Id).AddParameter("pinCode", user.Pincode);
 
             using NpgsqlDataReader reader = command.ExecuteReader();
             if (!reader.Read())
@@ -95,23 +90,22 @@ public class UserRepo : IUserRepository
         if (money + amount < 0)
             return new DataBaseOperationResults.NoFunds(user with { Money = money });
 
-        const string sql2 =
-            """
+        const string sql2 = """
             INSERT INTO operations(accountid, startmoney, moneydiff, date)
             VALUES (:accountId, :startMoney, :moneyDiff, NOW());
             """;
 
         using (var command2 = new NpgsqlCommand(sql2, connection))
         {
-            command2.AddParameter("accountId", user.Id)
+            command2
+                .AddParameter("accountId", user.Id)
                 .AddParameter("startMoney", money)
                 .AddParameter("moneyDiff", amount);
 
             command2.ExecuteNonQuery();
         }
 
-        const string sql3 =
-            """
+        const string sql3 = """
             UPDATE users
             SET moneyamount = :money
             WHERE accountid = :accountId;
@@ -119,8 +113,7 @@ public class UserRepo : IUserRepository
 
         using (var command3 = new NpgsqlCommand(sql3, connection))
         {
-            command3.AddParameter("money", money + amount)
-                .AddParameter("accountId", user.Id);
+            command3.AddParameter("money", money + amount).AddParameter("accountId", user.Id);
 
             command3.ExecuteNonQuery();
         }

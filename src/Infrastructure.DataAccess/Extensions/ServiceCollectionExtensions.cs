@@ -1,7 +1,7 @@
+using Application.Abstractions.Repositories;
 using Infrastructure.Repositories;
 using Itmo.Dev.Platform.Postgres.Extensions;
 using Itmo.Dev.Platform.Postgres.Models;
-using Application.Abstractions.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Infrastructure.Extensions;

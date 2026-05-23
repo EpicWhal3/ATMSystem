@@ -8,7 +8,7 @@ using Spectre.Console;
 
 namespace EnterPoint;
 
-public static class Program
+internal static class Program
 {
     public static void Main()
     {

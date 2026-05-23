@@ -1,8 +1,8 @@
-using Application.UserServices;
 using Application.Abstractions.Models;
 using Application.Abstractions.Repositories;
 using Application.Contracts.User;
 using Application.Models;
+using Application.UserServices;
 using Xunit;
 
 namespace Tests;
