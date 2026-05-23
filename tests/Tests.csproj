@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <IsPackable>false</IsPackable>
+        <IsTestProject>true</IsTestProject>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="coverlet.collector"/>
+        <PackageReference Include="Itmo.Dev.Platform.Postgres" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk"/>
+        <PackageReference Include="Npgsql" />
+        <PackageReference Include="NSubstitute" />
+        <PackageReference Include="Spectre.Console" />
+        <PackageReference Include="xunit"/>
+        <PackageReference Include="xunit.runner.visualstudio"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\src\EnterPoint\EnterPoint.csproj" />
+      <ProjectReference Include="..\src\Application.Abstractions\Application.Abstractions.csproj" />
+      <ProjectReference Include="..\src\Application.Contracts\Application.Contracts.csproj" />
+      <ProjectReference Include="..\src\Application.Models\Application.Models.csproj" />
+      <ProjectReference Include="..\src\Application\Application.csproj" />
+      <ProjectReference Include="..\src\Infrastructure.DataAccess\Infrastructure.DataAccess.csproj" />
+      <ProjectReference Include="..\src\Presentaion.Console\Presentaion.Console.csproj" />
+    </ItemGroup>
+
+</Project>
